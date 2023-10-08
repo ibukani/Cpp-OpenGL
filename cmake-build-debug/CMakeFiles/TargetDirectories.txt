@@ -1,0 +1,3 @@
+C:/Users/ibueb/Projects/graphics/Cpp-OpenGL/cmake-build-debug/CMakeFiles/Cpp_OpenGL.dir
+C:/Users/ibueb/Projects/graphics/Cpp-OpenGL/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/ibueb/Projects/graphics/Cpp-OpenGL/cmake-build-debug/CMakeFiles/rebuild_cache.dir

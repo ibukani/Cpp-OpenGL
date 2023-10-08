@@ -1,0 +1,4 @@
+# ninja log v5
+0	703	7184514414930300	CMakeFiles/Cpp_OpenGL.dir/main.cpp.obj	8941b2c59bf9487f
+14	734	7184514415248069	CMakeFiles/Cpp_OpenGL.dir/shaderClass.cpp.obj	b00cdebaeddb2d53
+7	1823	7184514426122147	CMakeFiles/Cpp_OpenGL.dir/glad.c.obj	abc603618b8a5198
