@@ -33,6 +33,8 @@ Shader::Shader(const char* vertexFile, const char* fragmentFile)
 	glShaderSource(vertexShader, 1, &vertexSource, nullptr);
 	// シェーダーをコンパイル
 	glCompileShader(vertexShader);
+	// VertexShaderのコンパイルが失敗したときにエラーを出力する
+	compileErrors(vertexShader, "VERTEX");
 
 	// 色を決定するためのシェーダーを作成
 	// 様々な情報（例えば光）をもとにしてその部分に正しい色を割り当てるためのシェーダ
@@ -41,6 +43,8 @@ Shader::Shader(const char* vertexFile, const char* fragmentFile)
 	glShaderSource(fragmentShander, 1, &fragmentSource, nullptr);
 	// シェーダーをコンパイル
 	glCompileShader(fragmentShander);
+	// FragmentShaderのコンパイルが失敗したときにエラーを出力する
+	compileErrors(fragmentShander, "FRAGMENT");
 
 	// 上のシェーダーをまとめるためのプログラムを作成
 	ID = glCreateProgram();
@@ -49,6 +53,8 @@ Shader::Shader(const char* vertexFile, const char* fragmentFile)
 	glAttachShader(ID, vertexShader);
 	// 付与して使える状態にするためのリンク
 	glLinkProgram(ID);
+	// Programのリンクが失敗したときにエラーを出力する
+	compileErrors(ID, "PROGRAM");
 
 	// シェーダーの削除
 	glDeleteShader(fragmentShander);
@@ -56,10 +62,37 @@ Shader::Shader(const char* vertexFile, const char* fragmentFile)
 
 }
 
-void Shader::Activate() {
+void Shader::Activate() 
+{
 	glUseProgram(ID);
 }
 
-void Shader::Delete() {
+void Shader::Delete() 
+{
 	glDeleteProgram(ID);
+}
+
+// シェーダーのコンパイルに失敗したときLOGをはくように
+void Shader::compileErrors(unsigned int shader, const char* type)
+{
+	GLint hasCompiled;
+	char infoLog[1024];
+	if (type != "PROGRAM")
+	{
+		glGetShaderiv(shader, GL_COMPILE_STATUS, &hasCompiled);
+		if (hasCompiled == GL_FALSE)
+		{
+			glGetShaderInfoLog(shader, 1024, nullptr, infoLog);
+			std::cout << "SHADER_COMPILATION_ERROR for:" << type << "\n" << std::endl;
+		}
+	}
+	else
+	{
+		glGetProgramiv(shader, GL_COMPILE_STATUS, &hasCompiled);
+		if (hasCompiled == GL_FALSE)
+		{
+			glGetProgramInfoLog(shader, 1024, nullptr, infoLog);
+			std::cout << "SHADER_LINKING_ERROR for:" << type << "\n" << std::endl;
+		}
+	}
 }

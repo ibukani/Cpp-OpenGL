@@ -76,6 +76,9 @@ int main(void)
 	EBO1.UnBind();
 
 
+	GLuint  uniID = glGetUniformLocation(shaderProgram.ID, "scale");
+
+
 	// WindowのCloseを検知してそれまでループさせる
 	while (!glfwWindowShouldClose(window))
 	{
@@ -85,6 +88,8 @@ int main(void)
 		glClear(GL_COLOR_BUFFER_BIT);
 		// 上で設定したプログラムを使用するように（アクティブにする）
 		shaderProgram.Activate();
+		// scaleのあったいを0.5fに変更
+		glUniform1f(uniID, 0.5f);
 		// VAOを指定して、そのデータを有効化する
 		VAO1.Bind();
 		// 頂点を描画する
