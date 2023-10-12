@@ -1,5 +1,4 @@
 #include <iostream>
-#include <cmath>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
@@ -11,13 +10,12 @@
 // 頂点のデータ
 GLfloat vertices[] =
 {
-	-0.5f, -0.5f * float(sqrt(3)) / 3, 0.0f, // 左の角
-	0.5f, -0.5f * float(sqrt(3)) / 3, 0.0f, // 右の角
-	0.0f, 0.5f * float(sqrt(3)) * 2 / 3, 0.0f, // 一番上
-	-0.5f / 2, 0.5f * float(sqrt(3)) / 6, 0.0f, // 真ん中の左
-	0.5f / 2, 0.5f * float(sqrt(3)) / 6, 0.0f, // 真ん中の右
-	0.0f, -0.5f * float(sqrt(3)) / 3, 0.0f, // 真ん中の下
-
+	-0.5f,  -0.5f * float(sqrt(3)) / 3,     0.0f, 0.8f, 0.3f,  0.02f,  // 左の角
+	 0.5f,  -0.5f * float(sqrt(3)) / 3,     0.0f, 0.8f, 0.3f,  0.02f,  // 右の角
+	 0.0f,   0.5f * float(sqrt(3)) * 2 / 3, 0.0f, 1.0f, 0.6f,  0.32f,  // 一番上
+	-0.25f,  0.5f * float(sqrt(3)) / 6,     0.0f, 0.9f, 0.45f, 0.17f,  // 真ん中の左
+	 0.25f,  0.5f * float(sqrt(3)) / 6,     0.0f, 0.9f, 0.45f, 0.17f,  // 真ん中の右
+	 0.0f,  -0.5f * float(sqrt(3)) / 3,     0.0f, 0.8f, 0.3f,  0.02f   // 真ん中の下
 };
 
 // インデックスのデータ
@@ -70,8 +68,8 @@ int main(void)
 	EBO EBO1(indices, sizeof(indices));
 
 	// VBOとのリンク
-	VAO1.LinkVBO(VBO1, 0);
-
+	VAO1.LinkAttrib(VBO1, 0, 3, GL_FLOAT, 6 * sizeof(float), (void*)0);
+	VAO1.LinkAttrib(VBO1, 1, 3, GL_FLOAT, 6 * sizeof(float), (void*)(3 * sizeof(float)));
 	// UnBINDの処理
 	VAO1.UnBind();
 	VBO1.UnBind();

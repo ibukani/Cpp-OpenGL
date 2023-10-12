@@ -18,6 +18,7 @@ std::string get_file_contents(const char* filename)
 
 Shader::Shader(const char* vertexFile, const char* fragmentFile) 
 {
+
 	// get shader code file
 	std::string vertexCode = get_file_contents(vertexFile);
 	std::string fragmentCode = get_file_contents(fragmentFile);
@@ -52,6 +53,7 @@ Shader::Shader(const char* vertexFile, const char* fragmentFile)
 	// シェーダーの削除
 	glDeleteShader(fragmentShander);
 	glDeleteShader(vertexShader);
+
 }
 
 void Shader::Activate() {
